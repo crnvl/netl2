@@ -1,19 +1,9 @@
-f test_fn {
-    v test = 20
+v comp_one = 1
+v comp_two = 2
+v comp_three = 3
+v comp_four = 3
 
-    w test > 0 {
-        p(test)
-        test = test - 1
-
-        i test == 10 {
-            p("test is 10")
-        }
-    }
+i comp_one == comp_two | comp_three != comp_four {
+    p("worked!")
 }
-
-f nested_fn {
-    v test = 3
-    p(test)
-    test_fn!
-}
-nested_fn!
+p("done")

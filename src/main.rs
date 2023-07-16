@@ -20,6 +20,7 @@ fn main() {
     };
 
     let tokens = logic::tokenizer::tokenize(&script);
+
     let parsed = match parse(tokens) {
         Ok(parsed) => parsed,
         Err(e) => {
@@ -27,5 +28,6 @@ fn main() {
             return;
         }
     };
+
     interpret(parsed);
 }

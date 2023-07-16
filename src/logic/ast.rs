@@ -2,24 +2,6 @@ use std::cmp::Ordering;
 
 use super::tokenizer::Token;
 
-/*
-    This is the language structure we want to parse into an AST:
-    v var_name = 2
-
-    w var_name >= 2 {
-        p("Hello World!")
-    }
-
-    i var_name != 2 {
-        main()
-    }
-
-    f main(param1, param2) {
-        p("Main function!")
-        r(param1)
-    }
-*/
-
 #[derive(Debug, Clone)]
 pub enum ASTNode {
     Program(Box<Vec<ASTNode>>),
@@ -144,9 +126,7 @@ impl Parser {
 
         self.consume(Token::RightBrace)?;
 
-        Ok(ASTNode::FunctionDeclaration(
-            identifier, statements,
-        ))
+        Ok(ASTNode::FunctionDeclaration(identifier, statements))
     }
 
     fn parse_print(&mut self) -> Result<ASTNode, String> {
@@ -182,22 +162,32 @@ impl Parser {
     }
 
     fn parse_expression(&mut self) -> Result<ASTNode, String> {
-        let mut left_node = self.parse_term()?;
+        let mut left_node = self.parse_simple_expression()?;
+        while self.current_token() == Token::And || self.current_token() == Token::Or {
+            let operator = self.current_token();
+            self.consume(operator.clone())?;
 
+            let right_node = self.parse_simple_expression()?;
+
+            left_node = ASTNode::Binary(Box::new(left_node), operator, Box::new(right_node));
+        }
+        Ok(left_node)
+    }
+
+    fn parse_simple_expression(&mut self) -> Result<ASTNode, String> {
+        let mut left_node = self.parse_term()?;
         while self.current_token() == Token::Plus
             || self.current_token() == Token::Minus
             || self.current_token() == Token::Asterisk
             || self.current_token() == Token::Slash
             || self.current_token() == Token::Percent
-            || self.current_token() == Token::GreaterThan
-            || self.current_token() == Token::GreaterThanEquals
             || self.current_token() == Token::LessThan
+            || self.current_token() == Token::GreaterThan
             || self.current_token() == Token::LessThanEquals
+            || self.current_token() == Token::GreaterThanEquals
             || self.current_token() == Token::EqualEqual
-            || self.current_token() == Token::Bang
             || self.current_token() == Token::NotEqual
-            || self.current_token() == Token::And
-            || self.current_token() == Token::Or
+            || self.current_token() == Token::Equals
         {
             let operator = self.current_token();
             self.consume(operator.clone())?;
@@ -206,7 +196,6 @@ impl Parser {
 
             left_node = ASTNode::Binary(Box::new(left_node), operator, Box::new(right_node));
         }
-
         Ok(left_node)
     }
 
