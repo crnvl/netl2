@@ -35,14 +35,14 @@ To use NETL2, you can simply run the executable with the path to the file you wa
 ## Scope
 Each file is its own scope, and variables are global to the file. This means that you can access variables from anywhere in the file.
 
-```nl
+```rs
     v var_name = 2
     p(var_name)
 ```
 
 Variables within a function are not global to the file, but are global to the function. This means that you can access variables from anywhere in the function.
 
-```nl
+```rs
     f main {
         v var_name = 2
         p(var_name)
@@ -53,7 +53,7 @@ Variables within a function are not global to the file, but are global to the fu
 
 Variables are declared with the `v` keyword, followed by the variable name, an equals sign, and the value.
 
-```nl
+```rs
     v var_name = 2
 ```
 
@@ -61,7 +61,7 @@ Variables are declared with the `v` keyword, followed by the variable name, an e
 
 If statements are declared with the `i` keyword, followed by the condition, and then the code block.
 
-```nl
+```rs
     i var_name == 2 {
         p("Hello World!")
     }
@@ -71,7 +71,7 @@ If statements are declared with the `i` keyword, followed by the condition, and 
 
 While loops are declared with the `w` keyword, followed by the condition, and then the code block.
 
-```nl
+```rs
     w var_name == 2 {
         p("Hello World!")
         var_name = 3
@@ -82,7 +82,7 @@ While loops are declared with the `w` keyword, followed by the condition, and th
 
 Functions are declared with the `f` keyword, followed by the function name, and then the code block.
 
-```nl
+```rs
     f main {
         p("Main function!")
     }
@@ -92,7 +92,7 @@ Functions are declared with the `f` keyword, followed by the function name, and 
 
 Functions are called with the `!` operator.
 
-```nl
+```rs
     main!
 ```
 
@@ -100,6 +100,6 @@ Functions are called with the `!` operator.
 
 Printing is done with the `p` keyword, followed by the value to print.
 
-```nl
+```rs
     p("Hello World!")
 ```

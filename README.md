@@ -12,19 +12,24 @@ streamlined, so that anti-patterns are difficult to write and the language is ea
 Get started [here](./docs/LEARN.md)
 
 ## Code examples
-```nl
-    v var_name = 2
+```rs
+    f test_fn {
+        v test = 20
 
-    w var_name == 2 {
-        p("Hello World!")
-        var_name = 3
+        w test > 0 {
+            p(test)
+            test = test - 1
+
+            i test == 10 {
+                p("test is 10")
+            }
+        }
     }
 
-    f main {
-        p("Main function!")
+    f nested_fn {
+        v test = 3
+        p(test)
+        test_fn!
     }
-
-    i var_name != 2 {
-        main!
-    }
+    nested_fn!
 ```
