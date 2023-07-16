@@ -19,6 +19,7 @@
 - `&` - Check if both values are true
 - `|` - Check if either value is true
 - `!` - Check if the value is false
+- `%` - Get the remainder of two values
 
 # Types in NETL2
 - `int` - Signed 32-bit integer
