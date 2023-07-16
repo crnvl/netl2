@@ -1,3 +1,4 @@
+[![Check Build](https://github.com/angelsflyinhell/netl2/actions/workflows/check.yml/badge.svg)](https://github.com/angelsflyinhell/netl2/actions/workflows/check.yml)
 # NETL2 - Streamlined high-level scripting
 NETL2 is a scripting language that takes the no-boilerplate approach of Rust to the extreme while still
 maintaining a readability you would expect from high-level languages. Additionally, NETL2 is designed to be concise and
