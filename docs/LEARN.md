@@ -5,9 +5,7 @@ If you're coming from a
 high-level language like Python or JavaScript, you may
 find that NETL2 does not include the `else` keyword for `if` statements. That is, because `else` can often lead to spaghetti code, and NETL2 is designed to be as streamlined as possible.
 
-Another missing keyword is `return`. In NETL2, all variables are global, and functions are called with the `!` operator.
-To modify a variable, you simply assign it a new value. While this may seem like a bad idea for memory management, NETL2 is designed to be a scripting language, and therefore is not designed for large projects.
-
+Another missing keyword is `return`. To modify a variable, you simply assign it a new value.
 Functions need to be declared first, and then called with the `!` operator. Functions also do not have parameters. If you want to pass a value to a function, you can simply assign it to a variable before calling the function.
 
 # Installation
