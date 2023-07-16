@@ -110,8 +110,10 @@ impl Interpreter {
                 self.variables.insert(name, *value);
             }
             ASTNode::VariableAssignment(name, value) => {
+                let evaluated_value = self.evaluate_expression(*value);
                 if let Some(variable) = self.variables.get_mut(&name) {
-                    *variable = *value;
+                    // eval value
+                    *variable = evaluated_value;
                 } else {
                     panic!("Variable {} not found", name);
                 }
@@ -145,22 +147,21 @@ impl Interpreter {
             ASTNode::If(expression, statements) => {
                 let evaluated_expression = self.evaluate_expression(*expression);
 
-                println!("{:?}", self.stringify_value(evaluated_expression.clone()));
-
                 if self.stringify_value(evaluated_expression) == "true" {
                     for statement in statements.iter() {
-                        println!("{:?}", statement);
                         self.interpret(statement.clone());
                     }
                 }
             }
             ASTNode::While(expression, statements) => {
-                let evaluated_expression = self.evaluate_expression(*expression);
+                // check if expression is true, if so, interpret statements and re-evaluate expression
+                let mut evaluated_expression = self.evaluate_expression(*expression.clone());
 
-                while self.stringify_value(evaluated_expression.clone()) == "true" {
+                while self.stringify_value(evaluated_expression) == "true" {
                     for statement in statements.iter() {
                         self.interpret(statement.clone());
                     }
+                    evaluated_expression = self.evaluate_expression(*expression.clone());
                 }
             }
             _ => panic!("Unexpected ASTNode: {:?}", ast),

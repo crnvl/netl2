@@ -8,7 +8,7 @@ find that NETL2 does not include the `else` keyword for `if` statements. That is
 Another missing keyword is `return`. In NETL2, all variables are global, and functions are called with the `!` operator.
 To modify a variable, you simply assign it a new value. While this may seem like a bad idea for memory management, NETL2 is designed to be a scripting language, and therefore is not designed for large projects.
 
-Functions need to be declared first, and then called with the `!` operator. Functions also do not have parameters, and instead use global variables.
+Functions need to be declared first, and then called with the `!` operator. Functions also do not have parameters. If you want to pass a value to a function, you can simply assign it to a variable before calling the function.
 
 # Installation
 
@@ -30,6 +30,23 @@ To use NETL2, you can simply run the executable with the path to the file you wa
 
 ```bash
     ./NETL2 path/to/file.nl
+```
+
+## Scope
+Each file is its own scope, and variables are global to the file. This means that you can access variables from anywhere in the file.
+
+```nl
+    v var_name = 2
+    p(var_name)
+```
+
+Variables within a function are not global to the file, but are global to the function. This means that you can access variables from anywhere in the function.
+
+```nl
+    f main {
+        v var_name = 2
+        p(var_name)
+    }
 ```
 
 ## Declaring variables
