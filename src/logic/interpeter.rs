@@ -56,7 +56,7 @@ impl Interpreter {
             }
             ASTNode::Print(expression) => {
                 let evaluated_expression = self.evaluate_expression(*expression);
-                println!("{:?}", self.stringify_value(evaluated_expression));
+                println!("{}", self.stringify_value(evaluated_expression));
             }
             ASTNode::If(expression, statements) => {
                 let evaluated_expression = self.evaluate_expression(*expression);
