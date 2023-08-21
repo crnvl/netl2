@@ -135,6 +135,7 @@ impl Interpreter {
             Token::Asterisk => self.evaluate_multiplication(left, right),
             Token::Slash => self.evaluate_division(left, right),
             Token::Percent => self.evaluate_modulo(left, right),
+            Token::Pow => self.evaluate_pow(left, right),
             Token::Equals => self.evaluate_equal(left, right),
             Token::EqualEqual => self.evaluate_equal_equal(left, right),
             Token::Bang => self.evaluate_not_equal(left, right),
@@ -194,6 +195,13 @@ impl Interpreter {
         match (left.clone(), right.clone()) {
             (ASTNode::Number(left), ASTNode::Number(right)) => ASTNode::Number(left % right),
             _ => panic!("Unexpected operands: {:?} % {:?}", left, right),
+        }
+    }
+
+    fn evaluate_pow(&mut self, left: ASTNode, right: ASTNode) -> ASTNode {
+        match (left.clone(), right.clone()) {
+            (ASTNode::Number(left), ASTNode::Number(right)) => ASTNode::Number(left.pow(right as u32)),
+            _ => panic!("Unexpected operands: {:?} ^ {:?}", left, right),
         }
     }
 

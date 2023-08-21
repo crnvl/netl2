@@ -181,6 +181,7 @@ impl Parser {
             || self.current_token() == Token::Asterisk
             || self.current_token() == Token::Slash
             || self.current_token() == Token::Percent
+            || self.current_token() == Token::Pow
             || self.current_token() == Token::LessThan
             || self.current_token() == Token::GreaterThan
             || self.current_token() == Token::LessThanEquals
