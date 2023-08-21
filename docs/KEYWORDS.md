@@ -20,6 +20,7 @@
 - `|` - Check if either value is true
 - `!` - Check if the value is false
 - `%` - Get the remainder of two values
+- `x^y` - Calculate the power x of a value y
 
 # Types in NETL2
 - `int` - Signed 32-bit integer
